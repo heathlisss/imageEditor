@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'style.css') }}">
+    <script src="{{url_for('static', filename='script.js')}}"></script>
+</head>
+<body>
+    <div class="header">
+        <h1>Редактор фотографий</h1>
+        <button class="menu-button" onclick="toggleMenu()">Меню</button>
+    </div>
+
+
+    <div class="page-container">
+        <!-- Левая часть страницы -->
+        <div class="left-section">
+            <form action="{{ url_for('index') }}" method="post">
+                <input type="text" name="url" placeholder="Вставьте ссылку на изображение" required size="42">
+                <button type="submit">Загрузить</button>
+            </form>
+            <br>
+            {% if image_url %}
+            <img src="{{ image_url }}" alt="Uploaded Image" width="60%">
+            {% endif %}
+        </div>
+
+        <!-- Правая часть страницы -->
+        <div class="right-section" id="menu">
+            <ul class="menu">
+                 <li>
+                    <label for="brightness">Яркость</label>
+                    <input type="range" min="-100" max="100" value="0" class="slider" id="brightness">
+                </li>
+                <li>
+                    <label for="darkness">Контрастность</label>
+                    <input type="range" min="-100" max="100" value="0" class="slider" id="darkness">
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+</body>
+</html>
