@@ -7,13 +7,41 @@
     }
 }
 
-var brightnessSlider = document.getElementById("brightness");
-var contrastSlider = document.getElementById("contrast");
+ function repaint(){
+    var brightness = document.getElementById("brightness").value;
+    var contrast = document.getElementById("contrast").value;
+    var sharpness = document.getElementById("sharpness").value;
+    console.log("Brightness:", brightness, "Contrast:", contrast, "Sharpness:", sharpness);
 
-brightnessSlider.addEventListener("input", function() {
-    updateBrightness(this.value);
-});
+    var imageUrl = document.getElementById("original-image-url").value;
 
-contrastSlider.addEventListener("input", function() {
-    updateContrast(this.value);
-});
+    fetch('/update_image', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            brightness: brightness,
+            contrast: contrast,
+            sharpness: sharpness,
+            url: imageUrl
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.processed_image_url) {
+            document.getElementById("uploaded-image").src = data.processed_image_url;
+        }
+    })
+    .catch(error => console.error('Error:', error));
+ }
+
+ function downloadImage() {
+    var imageUrl = document.getElementById("uploaded-image").src;
+    var link = document.createElement('a');
+    link.href = imageUrl;
+    link.download = 'processed_image.jpg';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}

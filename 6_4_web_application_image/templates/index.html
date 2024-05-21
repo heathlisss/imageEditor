@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename= 'style.css') }}">
-    <script src="{{url_for('static', filename='script.js')}}"></script>
 </head>
 <body>
     <div class="header">
@@ -14,33 +13,41 @@
 
 
     <div class="page-container">
-        <!-- Левая часть страницы -->
+
         <div class="left-section">
             <form action="{{ url_for('index') }}" method="post">
-                <input type="text" name="url" placeholder="Вставьте ссылку на изображение" required size="42">
+                <input type="text" name="url" placeholder="Вставьте ссылку на изображение" required size="42" class="input-url">
                 <button type="submit">Загрузить</button>
             </form>
             <br>
             {% if image_url %}
-            <img src="{{ image_url }}" alt="Uploaded Image" width="60%">
+            <input type="hidden" id="original-image-url" value="{{ image_url }}">
+            <img id="uploaded-image" src="{{ image_url }}" alt="Uploaded Image" width="400">
             {% endif %}
         </div>
 
-        <!-- Правая часть страницы -->
+
         <div class="right-section" id="menu">
             <ul class="menu">
                  <li>
                     <label for="brightness">Яркость</label>
-                    <input type="range" min="-100" max="100" value="0" class="slider" id="brightness">
+                    <input type="range" min="0" max="200" value="100" class="slider" id="brightness" oninput="repaint()">
                 </li>
                 <li>
-                    <label for="darkness">Контрастность</label>
-                    <input type="range" min="-100" max="100" value="0" class="slider" id="darkness">
+                    <label for="contrast">Контрастность</label>
+                    <input type="range" min="0" max="200" value="100" class="slider" id="contrast" oninput="repaint()">
+                </li>
+                <li>
+                    <label for="sharpness">Четкость</label>
+                    <input type="range" min="0" max="200" value="100" class="slider" id="sharpness" oninput="repaint()">
+                </li>
+                 <li>
+                  <button id="download-button" onclick="downloadImage()">Скачать</button>
                 </li>
             </ul>
         </div>
     </div>
 
-
+<script src="{{url_for('static', filename='script.js')}}"></script>
 </body>
 </html>

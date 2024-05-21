@@ -18,16 +18,29 @@ body {
     margin: 0;
 }
 
-.menu-button {
+.input-url {
+    width: 80%;
+    padding: 8px;
+    margin: 10px 0;
+    box-sizing: border-box;
+    border: 2px solid #333333;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #8f8f8f;
+    background-color: #333333;
+}
+
+button {
     background-color: #535353;
     color: #282828;
     border: none;
-    padding: 10px 20px;
+    padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 14px;
 }
 
-.menu-button:hover {
+button:hover {
     background-color: #dddddd;
 }
 
@@ -40,14 +53,14 @@ body {
 
 /* Стиль для левой части страницы (70%) */
 .left-section {
-    flex: 6.5;
+    flex: 6;
 
     padding: 20px;
 }
 
 /* Стиль для правой части страницы (30%) */
 .right-section {
-    flex: 3.5;
+    flex: 4;
     background-color: #333;
     padding: 5px;
     color: #dddddd;
@@ -74,8 +87,9 @@ li {
 .slider {
     width: 100%;
     margin-top: 10px;
-}
-
-.slider:hover{
-     background-color: #dddddd;
+    appearance: none;
+    height: 5px;
+    background: #535353 ;
+    outline: none;
+    border-radius: 2px;
 }
