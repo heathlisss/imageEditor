@@ -7,6 +7,7 @@ from PIL import ImageEnhance
 
 app = Flask(__name__)
 
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     image_url = None
