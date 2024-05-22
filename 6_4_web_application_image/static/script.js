@@ -11,7 +11,8 @@
     var brightness = document.getElementById("brightness").value;
     var contrast = document.getElementById("contrast").value;
     var sharpness = document.getElementById("sharpness").value;
-    console.log("Brightness:", brightness, "Contrast:", contrast, "Sharpness:", sharpness);
+    var color = document.getElementById("color").value;
+    console.log("Brightness:", brightness, "Contrast:", contrast, "Sharpness:", sharpness,"Color:", color);
 
     var imageUrl = document.getElementById("original-image-url").value;
 
@@ -24,6 +25,7 @@
             brightness: brightness,
             contrast: contrast,
             sharpness: sharpness,
+            color: color,
             url: imageUrl
         })
     })

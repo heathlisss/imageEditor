@@ -30,6 +30,7 @@ def update_image():
         brightness = float(data.get('brightness', 100)) / 100
         contrast = float(data.get('contrast', 100)) / 100
         sharpness = float(data.get('sharpness', 100)) / 100
+        color = float(data.get('color', 100)) / 100
 
         url = data.get('url')
 
@@ -38,7 +39,7 @@ def update_image():
             img_data = response.content
             image = Image.open(BytesIO(img_data))
 
-            enhanced_image = enhance_image(image, sharpness, brightness, contrast)
+            enhanced_image = enhance_image(image, brightness, contrast, sharpness, color)
 
             buffered = BytesIO()
             enhanced_image.save(buffered, format="JPEG")
@@ -50,15 +51,18 @@ def update_image():
     return jsonify({'error': 'Failed to process image'})
 
 
-def enhance_image(image, sharpness, brightness, contrast):
-    enhancer = ImageEnhance.Sharpness(image)
-    image = enhancer.enhance(sharpness)
-
+def enhance_image(image, brightness, contrast, sharpness, color):
     enhancer = ImageEnhance.Brightness(image)
     image = enhancer.enhance(brightness)
 
     enhancer = ImageEnhance.Contrast(image)
     image = enhancer.enhance(contrast)
+
+    enhancer = ImageEnhance.Sharpness(image)
+    image = enhancer.enhance(sharpness)
+
+    enhancer = ImageEnhance.Color(image)
+    image = enhancer.enhance(color)
 
     return image
 
